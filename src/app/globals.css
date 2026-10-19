@@ -1,0 +1,247 @@
+@import "tailwindcss";
+
+/* Tokens "Painel de moto". Dark only. */
+:root {
+  --bg: #0e1116;
+  --bg-deep: #05070a;
+  --surface: #171b22;
+  --line: #2a303a;
+  --line-soft: #1c222b;
+  --text: #f4f1ea;
+  --text-soft: #d5d9e0;
+  --muted: #a9b0bc;
+  /* Alternativas testadas: #ff7a00 e #ffd60a */
+  --accent: #ffb000;
+  --ok: #3ddc84;
+  --ok-bg: #0f2a1b;
+  --warn: #ffc24d;
+  --warn-bg: #33250a;
+  --danger: #ff8a80;
+
+  color-scheme: dark;
+}
+
+@theme inline {
+  --color-bg: var(--bg);
+  --color-bg-deep: var(--bg-deep);
+  --color-surface: var(--surface);
+  --color-line: var(--line);
+  --color-line-soft: var(--line-soft);
+  --color-text: var(--text);
+  --color-text-soft: var(--text-soft);
+  --color-muted: var(--muted);
+  --color-accent: var(--accent);
+  --color-ok: var(--ok);
+  --color-ok-bg: var(--ok-bg);
+  --color-warn: var(--warn);
+  --color-warn-bg: var(--warn-bg);
+  --color-danger: var(--danger);
+
+  --font-display: var(--font-barlow-condensed), "Arial Narrow", sans-serif;
+  --font-sans: var(--font-barlow), system-ui, sans-serif;
+  --font-mono: var(--font-plex-mono), ui-monospace, monospace;
+
+  --radius-btn: 8px;
+  --radius-card: 10px;
+  --radius-offer: 12px;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  html {
+    scroll-behavior: smooth;
+  }
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+  scrollbar-color: var(--line) var(--bg-deep);
+}
+
+body {
+  background: var(--bg);
+  color: var(--text-soft);
+  font-family: var(--font-sans);
+  font-size: 1.0625rem;
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+::selection {
+  background: var(--accent);
+  color: var(--bg-deep);
+}
+
+:focus-visible {
+  outline: 3px solid var(--accent);
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+
+a {
+  text-underline-offset: 0.2em;
+  text-decoration-thickness: 1px;
+}
+
+@layer components {
+  /* Títulos: Barlow Condensed 800, maiúsculas */
+  .display {
+    font-family: var(--font-display);
+    font-weight: 800;
+    text-transform: uppercase;
+    color: var(--text);
+    line-height: 0.95;
+    letter-spacing: -0.01em;
+    text-wrap: balance;
+  }
+
+  .chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5em;
+    font-family: var(--font-mono);
+    font-weight: 600;
+    font-size: 0.78125rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--accent);
+    font-variant-numeric: tabular-nums;
+  }
+
+  .btn-primary {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.625rem;
+    min-height: 3.5rem;
+    padding: 0.875rem 1.5rem;
+    border-radius: var(--radius-btn);
+    background: var(--accent);
+    color: var(--bg-deep);
+    font-family: var(--font-display);
+    font-weight: 800;
+    font-size: 1.25rem;
+    letter-spacing: 0.02em;
+    text-transform: uppercase;
+    text-decoration: none;
+    box-shadow: 0 6px 18px -8px rgb(255 176 0 / 0.55);
+    transition:
+      transform 160ms cubic-bezier(0.16, 1, 0.3, 1),
+      background-color 160ms ease,
+      box-shadow 160ms ease;
+  }
+  .btn-primary:hover {
+    background: #ffc233;
+    box-shadow: 0 10px 24px -10px rgb(255 176 0 / 0.65);
+  }
+  .btn-primary:active {
+    transform: translateY(1px);
+  }
+  .btn-primary:focus-visible {
+    outline-color: var(--text);
+  }
+
+  .text-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    min-height: 3rem;
+    color: var(--accent);
+    font-weight: 600;
+    text-decoration: underline;
+  }
+  .text-link:hover {
+    text-decoration-thickness: 2px;
+  }
+}
+
+/* Páginas legais */
+.legal h2 {
+  font-family: var(--font-display);
+  font-weight: 700;
+  text-transform: uppercase;
+  color: var(--text);
+  font-size: 1.625rem;
+  line-height: 1.05;
+  margin-top: 2.5rem;
+  margin-bottom: 0.75rem;
+}
+.legal p,
+.legal li {
+  max-width: 68ch;
+}
+.legal p + p {
+  margin-top: 0.75rem;
+}
+.legal ul {
+  list-style: disc;
+  padding-left: 1.25rem;
+  display: grid;
+  gap: 0.4rem;
+  margin-top: 0.5rem;
+}
+.legal a {
+  color: var(--accent);
+  text-decoration: underline;
+}
+.legal strong {
+  color: var(--text);
+}
+
+/* Trilho vertical: linha 2px + marcadores 16px com borda 3px accent */
+.journey {
+  --spine-x: 31px;
+  --spine-progress: 0;
+}
+.journey-spine {
+  position: absolute;
+  top: 0;
+  bottom: var(--spine-end, 0px);
+  left: var(--spine-x);
+  width: 2px;
+  background: var(--line);
+  pointer-events: none;
+}
+.journey-fill {
+  position: absolute;
+  inset: 0;
+  background: var(--accent);
+  transform-origin: top;
+  transform: scaleY(var(--spine-progress));
+  will-change: transform;
+}
+.journey-marker {
+  position: absolute;
+  /* alinhado ao centro do chip (py-11 = 44px; chip ~20px de altura) */
+  top: calc(2.75rem + 2px);
+  left: calc(var(--spine-x) - 7px);
+  width: 16px;
+  height: 16px;
+  border-radius: 999px;
+  border: 3px solid var(--accent);
+  background: var(--bg-deep);
+  transition:
+    background-color 200ms ease,
+    box-shadow 300ms ease;
+}
+.journey-marker[data-reached="true"] {
+  background: var(--accent);
+  box-shadow: 0 0 0 4px rgb(255 176 0 / 0.16);
+}
+@media (min-width: 768px) {
+  .journey {
+    --spine-x: 47px;
+  }
+  .journey-marker {
+    top: calc(4rem + 2px);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}
