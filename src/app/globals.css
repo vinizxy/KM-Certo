@@ -120,8 +120,9 @@ a {
     color: var(--bg-deep);
     font-family: var(--font-display);
     font-weight: 800;
-    font-size: 1.25rem;
+    font-size: clamp(1.0625rem, 0.9rem + 0.8vw, 1.25rem);
     letter-spacing: 0.02em;
+    text-align: center;
     text-transform: uppercase;
     text-decoration: none;
     box-shadow: 0 6px 18px -8px rgb(255 176 0 / 0.55);

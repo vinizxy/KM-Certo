@@ -8,9 +8,9 @@ export function OfferSection() {
     <JourneySection id="oferta" chip={offer.chip} title={offer.title} className="pb-16 md:pb-24">
       <p className="mt-3 text-lg text-text-soft">{offer.lead}</p>
 
-      <div className="mt-7 max-w-[34rem] rounded-[12px] border-2 border-accent bg-surface p-6 shadow-[0_24px_60px_-30px_rgb(255_176_0/0.35)] md:p-8">
-        <p className="flex items-baseline gap-3">
-          <span className="display text-[4rem] leading-none text-accent md:text-[5rem]">
+      <div className="mt-7 max-w-[34rem] rounded-[12px] border-2 border-accent bg-surface p-5 shadow-[0_24px_60px_-30px_rgb(255_176_0/0.35)] md:p-8">
+        <p className="flex flex-wrap items-baseline gap-x-3 gap-y-1">
+          <span className="display text-[3.5rem] leading-none whitespace-nowrap text-accent md:text-[5rem]">
             {offer.price}
           </span>
           <span className="font-mono text-sm font-semibold tracking-[0.08em] text-muted uppercase">

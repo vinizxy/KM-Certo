@@ -17,7 +17,7 @@ export const hero = {
   subtitle: "Calendário de manutenção por quilometragem, feito para quem trabalha de moto.",
   hook: "Óleo, corrente, freio, pneu: o guia mostra o que checar, de quantos em quantos km e quanto costuma custar. Você para de chutar e chega à oficina sabendo o que pedir.",
   cta: "Quero o Plano Km Certo",
-  micro: "PDF + PLANILHA DE BÔNUS · R$ 37 · PAGAMENTO ÚNICO",
+  micro: "PDF + PLANILHA DE BÔNUS · R$ 37,90 · PAGAMENTO ÚNICO",
   odometer: {
     value: "00000",
     unit: "KM",
@@ -115,7 +115,6 @@ export const audience = {
     title: "NÃO É PARA VOCÊ SE",
     items: [
       "Procura um curso de mecânica para abrir oficina.",
-      "Espera consertar tudo sozinho (freio, pneu e direção exigem um mecânico).",
       "Quer trocar o manual do fabricante por um guia.",
     ],
   },
@@ -125,7 +124,7 @@ export const offer = {
   chip: { label: "DESTINO · A OFERTA" },
   title: "Plano Km Certo",
   lead: "Um pagamento. Serve para cada revisão daqui em diante.",
-  price: "R$ 37",
+  price: "R$ 37,90",
   priceNote: "pagamento único",
   items: [
     "Guia em PDF com calendário por km",
@@ -161,7 +160,7 @@ export const safety = {
 
 export const sticky = {
   label: "Plano Km Certo",
-  price: "R$ 37",
+  price: "R$ 37,90",
   cta: "Quero o plano",
 };
 
@@ -181,10 +180,10 @@ export const footer = {
 export const seo = {
   title: "Plano Km Certo: calendário de manutenção para moto de trabalho | Km Certo Moto",
   description:
-    "Calendário de manutenção por km para moto de trabalho: checklist de 2 minutos, faixas de preço e sinais de alerta. Guia em PDF por R$ 37.",
+    "Calendário de manutenção por km para moto de trabalho: checklist de 2 minutos, faixas de preço e sinais de alerta. Guia em PDF por R$ 37,90.",
   productName: "Plano Km Certo",
   productDescription:
     "Guia em PDF de manutenção preventiva para moto de trabalho, com calendário por quilometragem, checklist de 2 minutos, tabela de serviços com faixas de preço e planilha de km e gastos de bônus.",
-  price: "37.00",
+  price: "37.90",
   currency: "BRL",
 };

@@ -37,8 +37,8 @@ export default function TermosPage() {
 
       <h2>3. Compra e entrega</h2>
       <p>
-        O pagamento é único, no valor de R$ 37, processado pela plataforma [NOME DA PLATAFORMA]. O
-        acesso é enviado ao e-mail informado na compra, depois da confirmação do pagamento.
+        O pagamento é único, no valor de R$ 37,90, processado pela plataforma [NOME DA PLATAFORMA].
+        O acesso é enviado ao e-mail informado na compra, depois da confirmação do pagamento.
       </p>
 
       <h2>4. Garantia e reembolso</h2>

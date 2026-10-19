@@ -1,3 +1,7 @@
+import { seo } from "@/content/page";
+
+const PRICE = Number(seo.price);
+
 /**
  * Consentimento (LGPD) e eventos do Meta Pixel.
  * Nada é carregado nem disparado sem consentimento explícito.
@@ -66,11 +70,11 @@ export function loadPixel(pixelId: string) {
   fbq("track", "ViewContent", {
     content_name: "Plano Km Certo",
     content_type: "product",
-    value: 37,
+    value: PRICE,
     currency: "BRL",
   });
 }
 
 export function trackInitiateCheckout() {
-  window.fbq?.("track", "InitiateCheckout", { value: 37, currency: "BRL" });
+  window.fbq?.("track", "InitiateCheckout", { value: PRICE, currency: "BRL" });
 }

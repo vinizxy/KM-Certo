@@ -26,6 +26,8 @@ const plexMono = IBM_Plex_Mono({
   weight: ["500", "600"],
   variable: "--font-plex-mono",
   display: "swap",
+  // Fora do caminho do LCP: não disputa banda com o título no 4G.
+  preload: false,
 });
 
 export const metadata: Metadata = {
