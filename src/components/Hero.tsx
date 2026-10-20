@@ -6,7 +6,7 @@ import { Odometer } from "./Odometer";
 
 export function SiteHeader() {
   return (
-    <header className="mx-auto flex w-full max-w-[1040px] items-center justify-between gap-4 px-6 pt-5 md:px-10 md:pt-8">
+    <header className="mx-auto flex w-full max-w-[1040px] flex-wrap items-center justify-between gap-x-4 gap-y-2 px-6 pt-5 md:px-10 md:pt-8">
       <p className="flex items-center gap-2 font-display text-lg font-bold tracking-[0.06em] text-text">
         <GaugeIcon size={26} className="text-accent" />
         <span>{env.brandName.toUpperCase()}</span>
@@ -27,13 +27,13 @@ export function Hero() {
         <div className="flex flex-col items-start">
           <Odometer {...hero.odometer} />
 
-          <h1 id="hero-title" className="display mt-7 text-[3.125rem] md:text-[4.5rem]">
+          <h1 id="hero-title" className="display mt-7 text-[min(3.125rem,14vw)] md:text-[4.5rem]">
             {hero.title.before}
             <span className="text-accent">{hero.title.highlight}</span>
             {hero.title.after}
           </h1>
 
-          <p className="mt-5 max-w-[34ch] text-lg leading-snug font-medium text-text md:text-xl">
+          <p className="mt-5 max-w-[34ch] text-lg leading-snug font-semibold text-text md:text-xl">
             {hero.subtitle}
           </p>
           <p className="mt-3 max-w-[48ch] text-muted">{hero.hook}</p>
@@ -42,7 +42,7 @@ export function Hero() {
             {hero.cta}
             <ArrowDownIcon size={22} />
           </a>
-          <p className="mt-3 font-mono text-xs font-medium tracking-[0.08em] text-muted">
+          <p className="mt-3 font-mono text-xs font-semibold tracking-[0.08em] text-muted">
             {hero.micro}
           </p>
         </div>

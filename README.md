@@ -19,11 +19,23 @@ Scripts:
 | Script                 | O que faz                                        |
 | ---------------------- | ------------------------------------------------ |
 | `npm run dev`          | Servidor de desenvolvimento                      |
-| `npm run build`        | Gera o site estático em `out/`                   |
+| `npm run build`        | Gera o site estático em `out/` (inclui os passos abaixo) |
+| `npm run build:enhance`| Compila `src/enhance` para `public/enhance.js` (esbuild) |
 | `npm run preview`      | Serve `out/` em http://localhost:4173            |
 | `npm run lint`         | ESLint (regras do Next + Prettier)               |
 | `npm run typecheck`    | TypeScript sem emitir arquivos                   |
 | `npm run format`       | Prettier (com ordenação de classes Tailwind)     |
+
+## Arquitetura de performance
+
+A página não usa hidratação do React. Todos os componentes são de servidor e o HTML sai pronto do build.
+
+- **Único JS:** `src/enhance/index.ts` (cerca de 1,7 KB gzip) cuida do trilho que se preenche, da contagem dos chips, dos links de checkout com UTMs, da barra fixa, do banner de cookies e do Pixel. A configuração chega por `data-*` no `<body>` (`src/app/layout.tsx`).
+- **Pós-build:** `scripts/strip-next-runtime.mjs` remove do HTML exportado o runtime do React/Next (cerca de 140 KB gzip que só serviriam para hidratar HTML estático). O build falha se sobrar algum script do Next.
+- **CSS inline** (`experimental.inlineCss`): sem requisição bloqueando a primeira pintura. É a escolha certa para tráfego de anúncio, em que quase todo visitante é novo.
+- **Fontes:** só a Barlow Condensed (títulos, elemento do LCP) é pré-carregada. Barlow e IBM Plex Mono chegam em seguida, com fallback de métricas ajustadas.
+
+Consequência: um componente novo que precise de interatividade não vira `"use client"`. O comportamento vai em `src/enhance`, acionado por um `data-*`.
 
 ## Variáveis de ambiente
 
@@ -98,8 +110,10 @@ O build gera arquivos estáticos em `out/`. Configure as variáveis de ambiente 
 src/
   app/            layout, página, privacidade, termos, 404, robots, sitemap, ícone
   components/     Hero, Odometer, Journey, JourneySection, KmChip, seções, StickyCta,
-                  Mascot, CookieConsent, MetaPixel, CheckoutLink, LegalPage, icons
+                  Mascot, CookieConsent, CheckoutLink, LegalPage, icons (todos de servidor)
+  enhance/        o único JS do navegador (compilado para public/enhance.js)
   content/page.ts todo o texto da página
   lib/            checkout (URL + UTMs), tracking (consentimento + Pixel), env
+scripts/          strip-next-runtime.mjs (pós-build)
 public/           og.png (placeholder), mascot.webp (pendente)
 ```

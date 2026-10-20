@@ -1,4 +1,7 @@
-import { env } from "./env";
+/**
+ * Monta a URL do checkout repassando UTMs, fbclid e src/sck da URL da página.
+ * Sem dependências de React ou do Next: roda no script do navegador (src/enhance).
+ */
 
 /**
  * Parâmetros repassados da URL da página para a URL do checkout.
@@ -18,8 +21,11 @@ export const forwardedParams: Record<string, string> = {
 
 const STORAGE_KEY = "kmcerto:params";
 
-/** Guarda os parâmetros de entrada para não perdê-los se a pessoa navegar para /privacidade e voltar. */
-function readParams(search: string): Record<string, string> {
+/**
+ * Lê os parâmetros de entrada. Guarda na sessão para não perdê-los
+ * se a pessoa navegar para /privacidade e voltar.
+ */
+export function readParams(search: string): Record<string, string> {
   const incoming = new URLSearchParams(search);
   const found: Record<string, string> = {};
   for (const key of Object.keys(forwardedParams)) {
@@ -39,24 +45,15 @@ function readParams(search: string): Record<string, string> {
   }
 }
 
-/** URL base do checkout, ou null quando a variável ainda não foi configurada. */
-export function baseCheckoutUrl(): string | null {
-  return env.checkoutUrl || null;
-}
-
-/** Monta a URL final do checkout repassando UTMs, fbclid e src/sck. Roda só no navegador. */
-export function buildCheckoutUrl(search: string = window.location.search): string | null {
-  const base = baseCheckoutUrl();
+/** URL final do checkout, ou null se a base estiver vazia ou inválida. */
+export function buildCheckoutUrl(base: string, params: Record<string, string>): string | null {
   if (!base) return null;
-
   let url: URL;
   try {
     url = new URL(base);
   } catch {
     return null;
   }
-
-  const params = readParams(search);
   for (const [key, value] of Object.entries(params)) {
     const target = forwardedParams[key];
     if (target && !url.searchParams.has(target)) url.searchParams.set(target, value);

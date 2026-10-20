@@ -1,16 +1,12 @@
-import { seo } from "@/content/page";
-
-const PRICE = Number(seo.price);
-
 /**
  * Consentimento (LGPD) e eventos do Meta Pixel.
  * Nada é carregado nem disparado sem consentimento explícito.
+ * Sem dependências de React ou do Next: roda no script do navegador (src/enhance).
  */
 
 export type ConsentChoice = "granted" | "denied";
 
 const CONSENT_KEY = "kmcerto:consent";
-export const CONSENT_EVENT = "kmcerto:consent";
 
 type Fbq = ((...args: unknown[]) => void) & {
   callMethod?: (...args: unknown[]) => void;
@@ -36,17 +32,16 @@ export function getConsent(): ConsentChoice | null {
   }
 }
 
-export function setConsent(choice: ConsentChoice) {
+export function saveConsent(choice: ConsentChoice) {
   try {
     localStorage.setItem(CONSENT_KEY, choice);
   } catch {
     // Armazenamento bloqueado: a escolha vale só para esta visita.
   }
-  window.dispatchEvent(new CustomEvent<ConsentChoice>(CONSENT_EVENT, { detail: choice }));
 }
 
-/** Injeta o fbevents.js oficial uma única vez. */
-export function loadPixel(pixelId: string) {
+/** Injeta o fbevents.js oficial uma única vez e dispara PageView + ViewContent. */
+export function loadPixel(pixelId: string, price: number) {
   if (window.fbq) return;
 
   const fbq: Fbq = function (...args: unknown[]) {
@@ -70,11 +65,11 @@ export function loadPixel(pixelId: string) {
   fbq("track", "ViewContent", {
     content_name: "Plano Km Certo",
     content_type: "product",
-    value: PRICE,
+    value: price,
     currency: "BRL",
   });
 }
 
-export function trackInitiateCheckout() {
-  window.fbq?.("track", "InitiateCheckout", { value: PRICE, currency: "BRL" });
+export function trackInitiateCheckout(price: number) {
+  window.fbq?.("track", "InitiateCheckout", { value: price, currency: "BRL" });
 }

@@ -41,3 +41,6 @@ yarn-error.log*
 next-env.d.ts
 
 !.env.example
+
+# gerado por npm run build:enhance
+/public/enhance.js

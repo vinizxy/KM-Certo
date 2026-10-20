@@ -1,0 +1,14 @@
+# Cloudflare Pages: cache de longo prazo para arquivos com hash no nome.
+# (Na Vercel isso já é automático para /_next/static.)
+/_next/static/*
+  Cache-Control: public, max-age=31536000, immutable
+
+/enhance.js
+  Cache-Control: public, max-age=3600
+
+/og.png
+  Cache-Control: public, max-age=86400
+
+/*
+  X-Content-Type-Options: nosniff
+  Referrer-Policy: strict-origin-when-cross-origin

@@ -12,7 +12,7 @@ type LegalPageProps = {
 export function LegalPage({ title, updated, children }: LegalPageProps) {
   return (
     <>
-      <header className="mx-auto flex w-full max-w-[760px] items-center justify-between gap-4 px-6 pt-5 md:pt-8">
+      <header className="mx-auto flex w-full max-w-[760px] flex-wrap items-center justify-between gap-x-4 gap-y-1 px-6 pt-5 md:pt-8">
         <Link
           href="/"
           className="flex min-h-12 items-center gap-2 font-display text-lg font-bold tracking-[0.06em] text-text no-underline"
@@ -29,7 +29,7 @@ export function LegalPage({ title, updated, children }: LegalPageProps) {
         tabIndex={-1}
         className="legal mx-auto w-full max-w-[760px] px-6 pt-10 pb-20 outline-none"
       >
-        <h1 className="display text-[2.75rem] md:text-[3.5rem]">{title}</h1>
+        <h1 className="display text-[min(2.75rem,11vw)] md:text-[3.5rem]">{title}</h1>
         <p className="mt-3 font-mono text-xs tracking-[0.08em] text-muted uppercase">
           Última atualização: {updated}
         </p>

@@ -10,7 +10,7 @@ export function OfferSection() {
 
       <div className="mt-7 max-w-[34rem] rounded-[12px] border-2 border-accent bg-surface p-5 shadow-[0_24px_60px_-30px_rgb(255_176_0/0.35)] md:p-8">
         <p className="flex flex-wrap items-baseline gap-x-3 gap-y-1">
-          <span className="display text-[3.5rem] leading-none whitespace-nowrap text-accent md:text-[5rem]">
+          <span className="display text-[min(3.5rem,15vw)] leading-none whitespace-nowrap text-accent md:text-[5rem]">
             {offer.price}
           </span>
           <span className="font-mono text-sm font-semibold tracking-[0.08em] text-muted uppercase">

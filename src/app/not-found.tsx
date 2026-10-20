@@ -8,7 +8,9 @@ export default function NotFound() {
       className="mx-auto flex min-h-[80vh] w-full max-w-[760px] flex-col items-start justify-center px-6 py-16"
     >
       <Odometer value="00404" unit="KM" label="Rota não encontrada" />
-      <h1 className="display mt-7 text-[3rem] md:text-[4rem]">Esse caminho não está no mapa</h1>
+      <h1 className="display mt-7 text-[min(3rem,12vw)] md:text-[4rem]">
+        Esse caminho não está no mapa
+      </h1>
       <p className="mt-4 max-w-[44ch] text-lg text-muted">
         A página que você procurou não existe ou mudou de endereço.
       </p>

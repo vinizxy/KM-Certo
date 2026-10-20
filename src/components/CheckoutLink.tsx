@@ -1,8 +1,4 @@
-"use client";
-
-import { useEffect, useState } from "react";
-import { baseCheckoutUrl, buildCheckoutUrl } from "@/lib/checkout";
-import { trackInitiateCheckout } from "@/lib/tracking";
+import { env } from "@/lib/env";
 
 type CheckoutLinkProps = {
   children: React.ReactNode;
@@ -10,21 +6,13 @@ type CheckoutLinkProps = {
 };
 
 /**
- * Link real para o checkout externo (mesma aba). O HTML estático já aponta para a URL base;
- * no navegador, a URL ganha UTMs/fbclid/src/sck da página. Sem URL configurada, cai em #oferta.
+ * Link real para o checkout externo (mesma aba). O HTML já aponta para a URL base;
+ * src/enhance acrescenta UTMs/fbclid/src/sck e dispara InitiateCheckout no clique.
+ * Sem URL configurada, cai em #oferta.
  */
 export function CheckoutLink({ children, className = "" }: CheckoutLinkProps) {
-  const [href, setHref] = useState(() => baseCheckoutUrl() ?? "#oferta");
-
-  useEffect(() => {
-    const url = buildCheckoutUrl();
-    // Sincroniza com dados que só existem no navegador (query string da visita).
-    // eslint-disable-next-line react-hooks/set-state-in-effect
-    if (url) setHref(url);
-  }, []);
-
   return (
-    <a href={href} className={className} onClick={trackInitiateCheckout}>
+    <a href={env.checkoutUrl || "#oferta"} data-checkout className={className}>
       {children}
     </a>
   );

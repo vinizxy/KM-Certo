@@ -24,7 +24,7 @@ export function ProblemSection() {
           </li>
         ))}
       </ol>
-      <p className="mt-8 max-w-[52ch] text-lg leading-snug font-medium text-text">
+      <p className="mt-8 max-w-[52ch] text-lg leading-snug font-semibold text-text">
         {problem.bridge}
       </p>
       <a href="#plano" className="text-link mt-1">

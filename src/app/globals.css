@@ -93,6 +93,8 @@ a {
     line-height: 0.95;
     letter-spacing: -0.01em;
     text-wrap: balance;
+    overflow-wrap: break-word;
+    hyphens: manual;
   }
 
   .chip {
@@ -162,8 +164,9 @@ a {
   font-weight: 700;
   text-transform: uppercase;
   color: var(--text);
-  font-size: 1.625rem;
+  font-size: min(1.625rem, 8vw);
   line-height: 1.05;
+  overflow-wrap: break-word;
   margin-top: 2.5rem;
   margin-bottom: 0.75rem;
 }
@@ -245,4 +248,27 @@ a {
     animation-duration: 0.01ms !important;
     transition-duration: 0.01ms !important;
   }
+}
+
+/* Barra fixa de CTA no mobile (src/enhance alterna data-visible) */
+.sticky-cta {
+  position: fixed;
+  inset-inline: 0;
+  bottom: 0;
+  z-index: 40;
+  padding-bottom: env(safe-area-inset-bottom);
+  background: rgb(5 7 10 / 0.95);
+  border-top: 1px solid var(--line);
+  backdrop-filter: blur(4px);
+  transform: translateY(100%);
+  opacity: 0;
+  pointer-events: none;
+  transition:
+    transform 300ms cubic-bezier(0.16, 1, 0.3, 1),
+    opacity 300ms ease;
+}
+.sticky-cta[data-visible="true"] {
+  transform: none;
+  opacity: 1;
+  pointer-events: auto;
 }

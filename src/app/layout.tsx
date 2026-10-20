@@ -1,32 +1,35 @@
 import type { Metadata, Viewport } from "next";
 import { Barlow, Barlow_Condensed, IBM_Plex_Mono } from "next/font/google";
 import { CookieConsent } from "@/components/CookieConsent";
-import { MetaPixel } from "@/components/MetaPixel";
 import { seo } from "@/content/page";
 import { env } from "@/lib/env";
 import "./globals.css";
 
 // next/font baixa as fontes no build e serve do próprio domínio: zero requisição ao Google em runtime.
+// Só a fonte dos títulos é pré-carregada: ela pinta o LCP (h1). As outras chegam logo depois,
+// com fallback de métricas ajustadas (sem salto de layout).
 const barlowCondensed = Barlow_Condensed({
   subsets: ["latin"],
-  weight: ["600", "700", "800"],
+  // 600 foi tirado por não ser usado em nenhum lugar: menos um arquivo no caminho do LCP.
+  weight: ["700", "800"],
   variable: "--font-barlow-condensed",
   display: "swap",
 });
 
 const barlow = Barlow({
   subsets: ["latin"],
-  weight: ["400", "500", "600"],
+  // 500 removido: cada peso é um arquivo e uma nova diagramação da página quando chega.
+  weight: ["400", "600"],
   variable: "--font-barlow",
   display: "swap",
+  preload: false,
 });
 
 const plexMono = IBM_Plex_Mono({
   subsets: ["latin"],
-  weight: ["500", "600"],
+  weight: ["600"],
   variable: "--font-plex-mono",
   display: "swap",
-  // Fora do caminho do LCP: não disputa banda com o título no 4G.
   preload: false,
 });
 
@@ -65,7 +68,8 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       lang="pt-BR"
       className={`${barlowCondensed.variable} ${barlow.variable} ${plexMono.variable}`}
     >
-      <body>
+      {/* Configuração lida por src/enhance (o único JS da página). */}
+      <body data-checkout={env.checkoutUrl} data-pixel={env.metaPixelId} data-price={seo.price}>
         <a
           href="#conteudo"
           className="sr-only z-[100] rounded-[8px] bg-accent px-4 py-3 font-semibold text-bg-deep focus:not-sr-only focus:fixed focus:top-3 focus:left-3"
@@ -74,7 +78,9 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         </a>
         {children}
         <CookieConsent />
-        <MetaPixel />
+        {/* Módulo = carregado sem bloquear e executado depois do parse do HTML. */}
+        {/* eslint-disable-next-line @next/next/no-sync-scripts */}
+        <script type="module" src="/enhance.js" />
       </body>
     </html>
   );

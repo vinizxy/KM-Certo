@@ -43,7 +43,7 @@ export function CalendarPreview() {
           <tbody>
             {calendarRows.map((row) => (
               <tr key={row.item} className="border-b border-line-soft last:border-b-0">
-                <th scope="row" className="px-2.5 py-3.5 font-medium text-text md:px-5">
+                <th scope="row" className="px-2.5 py-3.5 font-semibold text-text md:px-5">
                   {row.item}
                 </th>
                 <td className="px-2.5 py-3.5 font-mono text-sm font-semibold whitespace-nowrap text-accent tabular-nums md:px-5">

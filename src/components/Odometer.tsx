@@ -10,7 +10,7 @@ export function Odometer({ value, unit, label }: OdometerProps) {
   return (
     <figure className="flex flex-col gap-2">
       <div
-        className="flex items-end gap-2"
+        className="flex flex-wrap items-end gap-2"
         role="img"
         aria-label={`Odômetro marcando ${value} ${unit}`}
       >
@@ -18,7 +18,7 @@ export function Odometer({ value, unit, label }: OdometerProps) {
           {digits.map((d, i) => (
             <span
               key={i}
-              className="flex h-[46px] w-[34px] items-center justify-center rounded-[4px] border border-line bg-bg-deep font-mono text-[1.625rem] font-semibold text-accent tabular-nums shadow-[inset_0_-10px_14px_-10px_rgb(0_0_0/0.9)]"
+              className="flex aspect-[34/46] w-[min(34px,calc((100vw-64px)/5))] items-center justify-center rounded-[4px] border border-line bg-bg-deep font-mono text-[min(1.625rem,7.5vw)] font-semibold text-accent tabular-nums shadow-[inset_0_-10px_14px_-10px_rgb(0_0_0/0.9)]"
             >
               {d}
             </span>

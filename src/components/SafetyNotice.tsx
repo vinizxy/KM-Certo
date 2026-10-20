@@ -9,7 +9,7 @@ export function SafetyNotice() {
       className="flex gap-3 rounded-[10px] border border-warn/40 bg-warn-bg p-4 md:p-5"
     >
       <AlertIcon size={22} className="mt-0.5 shrink-0 text-warn" />
-      <p className="text-[0.9375rem] leading-snug font-medium text-warn">{safety.text}</p>
+      <p className="text-[0.9375rem] leading-snug font-semibold text-warn">{safety.text}</p>
     </aside>
   );
 }
